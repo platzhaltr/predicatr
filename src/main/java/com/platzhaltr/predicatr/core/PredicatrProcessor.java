@@ -26,21 +26,21 @@ public class PredicatrProcessor extends AbstractProcessor {
 
 	public void completeOr(final Match expr) {
 		final List<Match> children = expr.getChildrenByType(grammar.expr);
-		final boolean left = getResult(children.get(0));
-		final boolean right = getResult(children.get(1));
+		final boolean left = (Boolean) getResult(children.get(0));
+		final boolean right = (Boolean) getResult(children.get(1));
 		putResult(left | right);
 	}
 
 	public void completeAnd(final Match expr) {
 		final List<Match> children = expr.getChildrenByType(grammar.expr);
-		final boolean left = getResult(children.get(0));
-		final boolean right = getResult(children.get(1));
+		final boolean left = (Boolean) getResult(children.get(0));
+		final boolean right = (Boolean) getResult(children.get(1));
 		putResult(left & right);
 	}
 
 	public void completeNot(final Match expr) {
 		final List<Match> children = expr.getChildrenByType(grammar.expr);
-		final boolean bool = getResult(children.get(0));
+		final boolean bool = (Boolean) getResult(children.get(0));
 		putResult(!bool);
 	}
 
@@ -72,7 +72,7 @@ public class PredicatrProcessor extends AbstractProcessor {
 
 	public static boolean process(final Map<String, Boolean> variables,
 			final ParseResults results) {
-		return new PredicatrProcessor(variables).getResult(results
+		return (Boolean) new PredicatrProcessor(variables).getResult(results
 				.getLongestMatch());
 	}
 
