@@ -25,10 +25,7 @@ import com.googlecode.lingwah.parser.ParserReference;
  * 
  * @author Oliver Schrenk <oliver.schrenk@gmail.com>
  * 
- * 
- * 
  */
-
 public class PredicatrGrammar extends Grammar {
 
 	public static final PredicatrGrammar INSTANCE = new PredicatrGrammar();
@@ -36,6 +33,7 @@ public class PredicatrGrammar extends Grammar {
 	// these fields need to be public because lingwah uses reflection to
 	// access/invoke these
 
+	//@formatter:off
 	public final Parser whitespace = oneOrMore(cho(oneOrMore(regex("[ \t\n\f\r]"))));
 	public final Parser predicate = cho(str("true"), str("false"));
 	public final Parser variable = seq(oneOrMore(regex("[a-zA-z]")));
@@ -54,6 +52,7 @@ public class PredicatrGrammar extends Grammar {
 	{
 		expr.define(cho(predicate, variable, operator, group));
 	}
+	//@formatter:off
 
 	private PredicatrGrammar() {
 		init();

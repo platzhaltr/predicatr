@@ -8,6 +8,11 @@ import com.googlecode.lingwah.Match;
 import com.googlecode.lingwah.ParseResults;
 import com.googlecode.lingwah.annotations.Processes;
 
+/**
+ * 
+ * @author Oliver Schrenk <oliver.schrenk@gmail.com>
+ * 
+ */
 @Processes(PredicatrGrammar.class)
 public class PredicatrProcessor extends AbstractProcessor {
 
