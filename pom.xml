@@ -34,11 +34,17 @@
 		<system>github</system>
 		<url>https://github.com/platzhaltr/predicatr/issues</url>
 	</issueManagement>
+	
 	<scm>
 		<connection>scm:git:http://github.com/platzhaltr/predicatr.git</connection>
 		<developerConnection>scm:git:git@github.com:platzhaltr/predicatr.git</developerConnection>
 		<url>http://github.com/platzhaltr/predicatr</url>
 	</scm>
+
+	<ciManagement>
+		<system>Travis-ci</system>
+		<url>http://travis-ci.org/#!/platzhaltr/predicatr</url>
+	</ciManagement>
 
 	<properties>
 		<version.lingwah>1.0-SNAPSHOT</version.lingwah>
@@ -89,8 +95,6 @@
 			<artifactId>lingwah</artifactId>
 			<version>${version.lingwah}</version>
 		</dependency>
-
-
 
 		<!-- TEST -->
 
