@@ -70,9 +70,13 @@ public class PredicatrProcessor extends AbstractProcessor {
 		final List<Match> children = match.getChildren();
 		final String key = children.get(0).getText();
 		final String value = children.get(2).getText();
-		final boolean equals = variables.get(key).equals(value);
 
-		putResult(equals);
+		if (variables.get(key) == null) {
+			putResult(false);
+		} else {
+			final boolean equals = variables.get(key).equals(value);
+			putResult(equals);
+		}
 	}
 
 	public void completeVariable(final Match expr) {

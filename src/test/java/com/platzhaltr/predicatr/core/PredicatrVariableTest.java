@@ -67,4 +67,9 @@ public class PredicatrVariableTest {
 	public void testNotEquals() {
 		assertFalse(Predicatr.parse("! com.acme#foobar?", variables));
 	}
+
+	@Test
+	public void testEqualsOnNonExistingKey() {
+		assertFalse(Predicatr.parse("true & com.foo#bar?", variables));
+	}
 }
