@@ -10,8 +10,6 @@ import java.util.Map;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-import com.platzhaltr.predicatr.core.Predicatr;
-
 public class PredicatrTest {
 
 	private static Map<String, Boolean> variables;
@@ -42,6 +40,12 @@ public class PredicatrTest {
 
 	@Test
 	public void testBasics() {
+		assertTrue(Predicatr.parse("true"));
+		assertFalse(Predicatr.parse("false"));
+	}
+
+	@Test
+	public void testOperations() {
 		assertTrue(Predicatr.parse("true & true"));
 		assertFalse(Predicatr.parse("true & false"));
 		assertFalse(Predicatr.parse("false & false"));
