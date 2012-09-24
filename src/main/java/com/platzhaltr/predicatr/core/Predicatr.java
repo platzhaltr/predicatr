@@ -25,7 +25,7 @@ public class Predicatr {
 	 * @return true, if successful
 	 */
 	public static boolean parse(final String expression) {
-		return parse(expression, Collections.<String, Boolean> emptyMap());
+		return parse(expression, Collections.<String, Object> emptyMap());
 	}
 
 	/**
@@ -38,7 +38,7 @@ public class Predicatr {
 	 * @return true, if successful
 	 */
 	public static boolean parse(final String expression,
-			final Map<String, Boolean> variables) {
+			final Map<String, Object> variables) {
 		final ParseResults parseResults = ParseContext
 				.parse(PARSER, expression);
 		if (!parseResults.success()) {

@@ -10,7 +10,7 @@ import com.googlecode.lingwah.parser.ParserReference;
  * <code><pre>
  * blank   = ' ' | '\t' | '\n' | '\r';
  * whitespace = (blank, {blank});
- * char = 'a'|'b' ... |'z'|'A'|'B'| ... |'Z';
+ * char = 'a'|'b' ... |'z'|'A'|'B'| ... |'Z'|'.';
  * variable = char, { char };
  * true = 'true';
  * false = 'false';
@@ -36,7 +36,9 @@ public class PredicatrGrammar extends Grammar {
 	//@formatter:off
 	public final Parser whitespace = oneOrMore(cho(oneOrMore(regex("[ \t\n\f\r]"))));
 	public final Parser predicate = cho(str("true"), str("false"));
-	public final Parser variable = seq(oneOrMore(regex("[a-zA-z]")));
+	public final Parser key = seq(oneOrMore(regex("[a-zA-z\\.]")));
+	public final Parser variable = seq(oneOrMore(regex("[a-zA-z\\.]")));
+	public final Parser value = seq(oneOrMore(anyChar()));
 
 	public final ParserReference expr = ref();
 
@@ -47,10 +49,13 @@ public class PredicatrGrammar extends Grammar {
 	public final Parser not = seq(str('!'), expr).separatedBy(opt(whitespace));
 	public final Parser operator = first(and, or, not);
 
+	public final Parser existence = seq(key, str('?'));
+	public final Parser equals = seq(key, str('#'), value, str('?'));
+
 	public final Parser group = seq(str('('), expr, str(')')).separatedBy(
 			opt(whitespace));
 	{
-		expr.define(cho(predicate, variable, operator, group));
+		expr.define(cho(predicate, variable, existence, equals, operator, group));
 	}
 	//@formatter:off
 

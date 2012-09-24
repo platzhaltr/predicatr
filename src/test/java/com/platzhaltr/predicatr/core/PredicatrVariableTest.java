@@ -1,5 +1,6 @@
 package com.platzhaltr.predicatr.core;
 
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
 import java.util.HashMap;
@@ -10,13 +11,15 @@ import org.junit.Test;
 
 public class PredicatrVariableTest {
 
-	private static Map<String, Boolean> variables;
+	private static Map<String, Object> variables;
 
 	@BeforeClass
 	public static void setup() {
-		variables = new HashMap<String, Boolean>();
+		variables = new HashMap<String, Object>();
 		variables.put("yes", true);
 		variables.put("no", false);
+		variables.put("com.platzhaltr", true);
+		variables.put("com.acme", "foobar");
 	}
 
 	@Test
@@ -40,4 +43,28 @@ public class PredicatrVariableTest {
 		assertTrue(Predicatr.parse("!no & true", variables));
 	}
 
+	@Test
+	public void testDotInName() {
+		assertTrue(Predicatr.parse("true & com.platzhaltr", variables));
+	}
+
+	@Test
+	public void testExistence() {
+		assertTrue(Predicatr.parse("true & com.platzhaltr?", variables));
+	}
+
+	@Test
+	public void testNotExistence() {
+		assertFalse(Predicatr.parse("!com.platzhaltr?", variables));
+	}
+
+	@Test
+	public void testEquals() {
+		assertTrue(Predicatr.parse("true & com.acme#foobar?", variables));
+	}
+
+	@Test
+	public void testNotEquals() {
+		assertFalse(Predicatr.parse("! com.acme#foobar?", variables));
+	}
 }
